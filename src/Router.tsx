@@ -9,11 +9,11 @@ const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/:coinId/" element={<Coin />}>
+                <Route path="/react-mastercalss/:coinId/" element={<Coin />}>
                     <Route path={`price`} element={<Price />}></Route>
                     <Route path={`chart`} element={<Chart />}></Route>
                 </Route>
-                <Route path="/" element={<Coins />}></Route>
+                <Route path="/react-mastercalss/" element={<Coins />}></Route>
             </Routes>
             {/*<Routes>
                 <Route path="/:coinId/*" element={<Coin/>} />

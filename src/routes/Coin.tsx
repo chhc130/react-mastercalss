@@ -156,7 +156,7 @@ const Coin = () => {
                 </title>
             </Helmet>
             <Header>
-                <Link to={`/`}>
+                <Link to={`/react-mastercalss`}>
                     <BackButton>Back</BackButton>
                 </Link>
 
