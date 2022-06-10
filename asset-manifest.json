@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-mastercalss/static/css/main.e6c13ad2.css",
-    "main.js": "/react-mastercalss/static/js/main.50a37746.js",
+    "main.js": "/react-mastercalss/static/js/main.abe1c777.js",
     "index.html": "/react-mastercalss/index.html",
     "main.e6c13ad2.css.map": "/react-mastercalss/static/css/main.e6c13ad2.css.map",
-    "main.50a37746.js.map": "/react-mastercalss/static/js/main.50a37746.js.map"
+    "main.abe1c777.js.map": "/react-mastercalss/static/js/main.abe1c777.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.50a37746.js"
+    "static/js/main.abe1c777.js"
   ]
 }
