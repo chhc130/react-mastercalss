@@ -9,6 +9,7 @@ import {fetchCoinInfo, fetchCoins, fetchCoinTickers} from "../api";
 const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accentColor};
+  flex: 4;
 `;
 
 const Loader = styled.span`
@@ -25,9 +26,17 @@ const Container = styled.div`
 const Header = styled.header`
   height: 15vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  text-align: center;
 `;
+
+const BackButton = styled.button`
+    flex: 1;
+`
+const Span = styled.span`
+    flex: 1;
+`
 
 const Overview = styled.div`
   display: flex;
@@ -102,16 +111,16 @@ interface PriceData {
     name: string;
     symbol: string;
     rank: string;
-    price_usd: string;
-    price_btc: string;
-    volume_24h_usd: string;
-    market_cap_usd: string;
-    circulating_supply: string;
-    total_supply: string;
-    max_supply: string;
-    percent_change_1h: string;
-    percent_change_24h: string;
-    percent_change_7d: string;
+    price_usd: number;
+    price_btc: number;
+    volume_24h_usd: number;
+    market_cap_usd: number;
+    circulating_supply: number;
+    total_supply: number;
+    max_supply: number;
+    percent_change_1h: number;
+    percent_change_24h: number;
+    percent_change_7d: number;
     last_updated: string;
 }
 
@@ -122,23 +131,6 @@ interface RouteState {
 }
 
 const Coin = () => {
-    /*const [loading, setLoading] = useState(true);
-    const [info, setInfo] = useState<InfoData>();
-    const [priceInfo, setPriceInfo] = useState<PriceData>();
-    const { coinId } = useParams();
-    const { state } = useLocation() as unknown as RouteState;
-    const priceMatch = useMatch('/:coinId/price');
-    const chartMatch = useMatch('/:coinId/chart');
-
-    useEffect(() => {
-        (async () => {
-            const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
-            const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
-            setInfo(infoData);
-            setPriceInfo(priceData);
-            setLoading(false);
-        })();
-    }, [coinId])*/
     const { coinId } = useParams();
     const { state } = useLocation() as unknown as RouteState;
     const { isLoading : tickersLoading, data : tickersData }  = useQuery<PriceData>(
@@ -154,6 +146,7 @@ const Coin = () => {
         ['info', coinId],
         () => fetchCoinInfo(coinId)
     );
+
     const loading = infoLoading || tickersLoading;
     return (
         <Container>
@@ -163,9 +156,14 @@ const Coin = () => {
                 </title>
             </Helmet>
             <Header>
+                <Link to={`/`}>
+                    <BackButton>Back</BackButton>
+                </Link>
+
                 <Title>
                     {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
                 </Title>
+                <Span></Span>
             </Header>
             {loading ? <Loader>Loading....</Loader> :
                 <>
@@ -199,7 +197,21 @@ const Coin = () => {
                             <Link to={`/${coinId}/chart`}>Chart</Link>
                         </Tab>
                         <Tab isActive={priceMatch !== null}>
-                            <Link to={`/${coinId}/price`}>Price</Link>
+                            <Link
+                                to={`/${coinId}/price`}
+                                state={{
+                                    price_usd : tickersData?.price_usd,
+                                    price_btc: tickersData?.price_btc,
+                                    volume_24h_usd: tickersData?.volume_24h_usd,
+                                    market_cap_usd: tickersData?.market_cap_usd,
+                                    circulating_supply: tickersData?.circulating_supply,
+                                    total_supply: tickersData?.total_supply,
+                                    max_supply: tickersData?.max_supply,
+                                    percent_change_1h: tickersData?.percent_change_1h,
+                                    percent_change_24h: tickersData?.percent_change_24h,
+                                    percent_change_7d: tickersData?.percent_change_7d,
+                                }}
+                            >Price</Link>
                         </Tab>
                     </Tabs>
                     <Outlet />
