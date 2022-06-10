@@ -194,11 +194,11 @@ const Coin = () => {
                     </Overview>
                     <Tabs>
                         <Tab isActive={chartMatch !== null}>
-                            <Link to={`/${coinId}/chart`}>Chart</Link>
+                            <Link to={`/react-mastercalss/${coinId}/chart`}>Chart</Link>
                         </Tab>
                         <Tab isActive={priceMatch !== null}>
                             <Link
-                                to={`/${coinId}/price`}
+                                to={`/react-mastercalss/${coinId}/price`}
                                 state={{
                                     price_usd : tickersData?.price_usd,
                                     price_btc: tickersData?.price_btc,
